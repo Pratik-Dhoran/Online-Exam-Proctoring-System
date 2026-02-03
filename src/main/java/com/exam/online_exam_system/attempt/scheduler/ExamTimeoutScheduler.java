@@ -2,6 +2,7 @@ package com.exam.online_exam_system.attempt.scheduler;
 
 import com.exam.online_exam_system.attempt.entity.Attempt;
 import com.exam.online_exam_system.attempt.repository.AttemptRepository;
+import com.exam.online_exam_system.attempt.service.impl.AttemptServiceImpl;
 import com.exam.online_exam_system.result.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,9 +16,12 @@ public class ExamTimeoutScheduler {
 
     @Autowired
     AttemptRepository attemptRepository;
+
+    @Autowired
+    AttemptServiceImpl attemptService;
+
     @Autowired
     ResultService resultService;
-
 
     @Scheduled(fixedRate = 60000)
     public void checkTimeouts() {
@@ -28,14 +32,15 @@ public class ExamTimeoutScheduler {
 
             if (attempt.getStatus().equals("IN_PROGRESS")) {
 
-                LocalDateTime endTime = attempt.getStartTime()
-                        .plusMinutes(attempt.getExam().getDurationMinutes());
+                LocalDateTime autoEndTime =
+                        attempt.getStartTime()
+                                .plusMinutes(attempt.getExam().getDurationMinutes());
 
-                if (LocalDateTime.now().isAfter(endTime)) {
-                    attempt.setStatus("TIMEOUT");
-                    attempt.setEndTime(LocalDateTime.now());
-                    attemptRepository.save(attempt);
-                    resultService.evaluateResult(attempt.getId());
+                if (LocalDateTime.now().isAfter(autoEndTime)) {
+
+                    attemptService.autoSubmit(attempt);
+
+                    resultService.calculateResult(attempt.getId());
                 }
             }
         }

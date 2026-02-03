@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Paper</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Fullscreen overlay -->
+<div id="fullscreen-overlay" class="fullscreen-overlay">
+    <div class="fullscreen-card">
+        <h2>Ready to Start?</h2>
+
+        <p>
+            The exam will begin in fullscreen mode.<br>
+            Please avoid switching tabs or exiting fullscreen.
+        </p>
+        <br>
+
+        <ul>
+            <li>Timer will start immediately</li>
+            <li>Tab switching will increase risk score</li>
+            <li>Fullscreen exit will be monitored</li>
+        </ul>
+
+        <button class="start-btn" onclick="enterFullscreen()">
+            Enter Fullscreen & Start Exam
+        </button>
+    </div>
+</div>
+
+
+
+<div class="navbar">
+    <h3 id="exam-title">Loading Exam...</h3>
+    <div id="timer">Time Left: --</div>
+</div>
+
+<div id="question-area" style="margin:20px;"></div>
+
+<div style="display:flex; justify-content:flex-end; margin:40px;">
+    <button onclick="submitExam()">Submit Exam</button>
+</div>
+
+<script src="js/exam-paper.js"></script>
+<script src="js/proctor.js"></script>
+
+</body>
+</html>

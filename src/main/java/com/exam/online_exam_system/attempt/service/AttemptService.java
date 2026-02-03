@@ -4,4 +4,6 @@ import com.exam.online_exam_system.attempt.entity.Attempt;
 
 public interface AttemptService {
     Attempt startExam(Long examId, String userEmail);
+
+    public void submitExam(Long attemptId) ;
 }

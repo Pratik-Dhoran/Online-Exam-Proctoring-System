@@ -29,4 +29,6 @@ public class Attempt {
 
     private String status; // IN_PROGRESS, SUBMITTED, TIMEOUT
 
+    private int riskScore = 0;
+
 }

@@ -1,26 +1,33 @@
 package com.exam.online_exam_system.payment.controller;
 
-import com.exam.online_exam_system.auth.jwt.JwtUtil;
-import com.exam.online_exam_system.payment.entity.Payment;
-import com.exam.online_exam_system.payment.service.PaymentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/payments")
 public class PaymentController {
 
-    @Autowired
-    PaymentService paymentService;
+    private static final String KEY_ID = "rzp_test_SBYPI5bpzVBkkN";
+    private static final String KEY_SECRET = "oMyNs5x1wRy4AcknP4YcA2Gt";
 
-    @PostMapping("/pay")
-    public Payment pay(@RequestParam double amount,
-                       @RequestParam String product,
-                       @RequestHeader("Authorization") String authHeader) {
+    @PostMapping("/create-order")
+    public String createOrder(@RequestBody Map<String, Object> body) throws Exception {
 
-        String token = authHeader.substring(7);
-        String email = JwtUtil.extractEmail(token);
+        int amount = (int) body.get("amount");
 
-        return paymentService.makePayment(email, amount, product);
+        RazorpayClient client = new RazorpayClient(KEY_ID, KEY_SECRET);
+
+        JSONObject orderRequest = new JSONObject();
+        orderRequest.put("amount", amount);
+        orderRequest.put("currency", "INR");
+        orderRequest.put("receipt", "COURSE_" + System.currentTimeMillis());
+
+        Order order = client.orders.create(orderRequest);
+
+        return order.toString();
     }
 }

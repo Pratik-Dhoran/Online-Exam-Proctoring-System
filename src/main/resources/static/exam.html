@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+<div class="navbar">
+    <h3>TechEval Platform</h3>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<h2 style="margin-left: 20px;">Available Exams</h2>
+
+<div id="exam-list" class="exam-container"></div>
+
+<hr style="margin: 30px 20px;">
+
+<h2 style="margin-left: 20px;">Available Courses</h2>
+
+<div id="course-list" class="exam-container">
+    <div class="exam-card">
+        <h3>Java + Spring Boot</h3>
+        <p>Complete backend development with Spring Boot.</p>
+        <p><b>Fees:</b> ₹999</p>
+        <button onclick="enrollCourse(1)">Enroll Now</button>
+    </div>
+
+    <div class="exam-card">
+        <h3>DSA in Java</h3>
+        <p>Master data structures and algorithms in Java.</p>
+        <p><b>Fees:</b> ₹799</p>
+        <button onclick="enrollCourse(2)">Enroll Now</button>
+    </div>
+
+    <div class="exam-card">
+        <h3>Full Stack Web</h3>
+        <p>HTML, CSS, JS + Spring Boot backend.</p>
+        <p><b>Fees:</b> ₹1299</p>
+        <button onclick="enrollCourse(3)">Enroll Now</button>
+    </div>
+</div>
+
+<script src="js/exam.js"></script>
+</body>
+</html>

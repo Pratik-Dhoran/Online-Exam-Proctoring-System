@@ -18,8 +18,10 @@ public class AttemptServiceImpl implements AttemptService {
 
     @Autowired
     AttemptRepository attemptRepository;
+
     @Autowired
     ExamRepository examRepository;
+
     @Autowired
     UserRepository userRepository;
 
@@ -41,10 +43,16 @@ public class AttemptServiceImpl implements AttemptService {
         return attemptRepository.save(attempt);
     }
 
+    // ----- MANUAL SUBMIT -----
     public void submitExam(Long attemptId) {
 
         Attempt attempt = attemptRepository.findById(attemptId)
                 .orElseThrow(() -> new ApiException("Attempt not found"));
+
+        // Prevent double submit
+        if (!attempt.getStatus().equals("IN_PROGRESS")) {
+            throw new ApiException("Exam already submitted or timed out");
+        }
 
         attempt.setEndTime(LocalDateTime.now());
         attempt.setStatus("SUBMITTED");
@@ -52,4 +60,11 @@ public class AttemptServiceImpl implements AttemptService {
         attemptRepository.save(attempt);
     }
 
+    // ----- BACKEND AUTO-SUBMIT HELPER -----
+    public void autoSubmit(Attempt attempt) {
+
+        attempt.setStatus("TIMEOUT");
+        attempt.setEndTime(LocalDateTime.now());
+        attemptRepository.save(attempt);
+    }
 }

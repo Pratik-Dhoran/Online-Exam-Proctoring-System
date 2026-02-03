@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
         String token = JwtUtil.generateToken(user.getEmail());
 
-        return new LoginResponse(token);
+        return new LoginResponse(token, user.getRole());
     }
 
 

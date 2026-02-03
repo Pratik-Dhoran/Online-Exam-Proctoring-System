@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h3>Admin Panel</h3>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<div class="admin-container">
+
+    <h2>Create New Exam</h2>
+
+    <div class="admin-card">
+        <input id="title" placeholder="Exam Title"><br><br>
+        <input id="description" placeholder="Exam Description"><br><br>
+        <input id="duration" placeholder="Duration (minutes)" type="number"><br><br>
+
+        <button onclick="createExam()">Create Exam</button>
+    </div>
+
+    <hr>
+
+    <h2>All Exams</h2>
+    <div id="admin-exam-list"></div>
+
+    <hr>
+
+    <h2>Add Question to Exam</h2>
+
+    <div class="admin-card">
+
+        <label>Exam ID:</label><br>
+        <input id="q-exam-id" placeholder="Enter Exam ID"><br><br>
+
+        <label>Question:</label><br>
+        <input id="q-text" placeholder="Enter question text"><br><br>
+
+        <label>Options (separate by comma):</label><br>
+        <input id="q-options" placeholder="e.g. A,B,C,D"><br><br>
+
+        <label>Correct Option Index (0,1,2,3):</label><br>
+        <input id="q-correct" type="number" placeholder="0"><br><br>
+
+        <button onclick="addQuestion()">Add Question</button>
+
+    </div>
+
+
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

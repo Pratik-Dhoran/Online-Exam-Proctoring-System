@@ -54,6 +54,7 @@ function startExam(examId) {
     })
     .then(data => {
         localStorage.setItem("attemptId", data.id);
+        localStorage.setItem("examId", examId);
         window.location.href = "exam-paper.html";
     })
     .catch(err => {
@@ -92,7 +93,7 @@ function enrollCourse(courseId) {
             "order_id": order.id,
             "handler": function () {
 
-                alert("Enrolled successfully 🎉");
+                alert("Enrolled successfully");
 
                 window.location.href = "exam.html";
             }

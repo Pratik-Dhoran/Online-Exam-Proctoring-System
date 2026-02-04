@@ -21,7 +21,16 @@ function enterFullscreen() {
 
 
 function loadExamPaper() {
-    fetch("/api/exams/1/paper")
+
+    let examId = localStorage.getItem("examId");
+
+    if (!examId) {
+        alert("Exam ID missing — please start exam again!");
+        window.location.href = "exam.html";
+        return;
+    }
+
+    fetch(`/api/exams/${examId}/paper`)
         .then(res => {
             if (!res.ok) throw new Error("Failed to load exam paper: " + res.status);
             return res.json();

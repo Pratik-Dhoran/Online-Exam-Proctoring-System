@@ -4,7 +4,7 @@ function register() {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    fetch("http://localhost:8080/api/users/register", {
+    fetch("/api/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -33,7 +33,7 @@ function login() {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    fetch("http://localhost:8080/api/users/login", {
+    fetch("/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

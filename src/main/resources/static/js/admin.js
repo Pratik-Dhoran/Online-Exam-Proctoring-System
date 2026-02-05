@@ -17,7 +17,10 @@ function createExam() {
 
     fetch("/api/exams", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         body: JSON.stringify({
             title: title,
             description: description,
@@ -84,7 +87,10 @@ function addQuestion() {
 
     fetch(`/api/exams/${examId}/questions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         body: JSON.stringify(requestBody)
     })
     .then(res => res.json())

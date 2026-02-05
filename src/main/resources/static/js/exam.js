@@ -110,13 +110,4 @@ function enrollCourse(courseId) {
 }
 
 
-function verifyPayment(paymentId, orderId, signature) {
-    fetch("/api/payments/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ paymentId, orderId, signature })
-    })
-    .then(res => res.json())
-    .then(() => window.location.href = "enrolled.html")
-    .catch(err => alert("Payment verification failed"));
-}
+
